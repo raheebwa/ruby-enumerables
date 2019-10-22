@@ -14,13 +14,13 @@ def solve
   # end
 
   # TEST FOR #my_select
-  numbers = [1, 2, 3, 4, 5, 6]
-  p numbers.my_select { |x| x.even? }
-  p numbers
+  # numbers = [1, 2, 3, 4, 5, 6]
+  # p numbers.my_select { |x| x.even? }
+  # p numbers
 
   # TEST FOR #my_all?
-  # numbers = [1, 2, 3, 4, 5]
-  # p numbers.my_all? { |x| x < 6 }
+  numbers = [1, 2, 3, 4, 5]
+  p numbers.my_all? { |x| x < 6 }
 
   # TEST FOR #my_any?
   # numbers = [1, 2, 3, 4, 5, 6]
