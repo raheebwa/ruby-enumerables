@@ -36,11 +36,17 @@ def solve
   # p strings.count
 
   # TEST FOR #my_map
-  array = [1, 2, 3]
-  p(array.my_map { |n| n * 2 })
-  #  Control
-  p(array.map { |n| n * 2 })
+  # array = [1, 2, 3]
+  # p(array.my_map { |n| n * 2 })
+  # #  Control
+  # p(array.map { |n| n * 2 })
 
+  # TEST FOR #my_inject
+  arr = [3, 6, 10, 13]
+  p(arr.my_inject(:+))
+  # Control
+  p(arr.inject(:+))
+  
 end
 
 solve
