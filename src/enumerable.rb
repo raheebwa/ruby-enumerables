@@ -78,13 +78,14 @@ module Enumerable
     self.length
   end
 
-  def my_map
-    i = 0
+  def my_map block=nil
+    
     mapped_arr = []
-    while i < length
-       mapped_arr << yield(self[i])
-        i+=1
-    end
+     if block
+        self.my_each_with_index {|elem,index| mapped_arr[index] = block.call(elem)}
+      else
+        self.my_each_with_index {|elem,index| mapped_arr[index] = yield(elem)}
+      end
     mapped_arr
   end
 
