@@ -23,12 +23,12 @@ def solve
   # p numbers.my_all? { |x| x < 6 }
 
   # TEST FOR #my_any?
-  numbers = [1, 2, 3, 4, 5, 6]
-  p numbers.my_any? { |x| x != 4 }
+  # numbers = [1, 2, 3, 4, 5, 6]
+  # p numbers.my_any? { |x| x != 4 }
 
   # TEST FOR #my_none?
-  # numbers = [1, 2, 3, 4, 5]
-  # p numbers.my_none? {|x| x.is_a?(String) }
+  numbers = [1, 2, 3, 4, 5]
+  p numbers.my_none? {|x| x.is_a?(String) }
 
   # TEST FOR #my_count
   # strings = ["one", "two", "three", "four"]
