@@ -62,8 +62,21 @@ module Enumerable
     false
   end
 
-  # def my_map
-  # end
+  def my_count
+     i = 0
+    count = []
+
+    if block_given?
+      while i < self.length
+        if yield(self[i])
+          count << self[i]
+        end
+        i += 1
+      end
+      return count.length
+    end
+    self.length
+  end
 
   # def my_inject
   # end
