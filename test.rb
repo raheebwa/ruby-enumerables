@@ -31,9 +31,16 @@ def solve
   # p numbers.my_none? {|x| x.is_a?(String) }
 
   # TEST FOR #my_count
-  strings = ["one", "two", "three", "four"]
-  p strings.my_count
-  p strings.count
+  # strings = ["one", "two", "three", "four"]
+  # p strings.my_count
+  # p strings.count
+
+  # TEST FOR #my_map
+  array = [1, 2, 3]
+  p(array.my_map { |n| n * 2 })
+  #  Control
+  p(array.map { |n| n * 2 })
+
 end
 
 solve
