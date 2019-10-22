@@ -78,6 +78,16 @@ module Enumerable
     self.length
   end
 
+  def my_map
+    i = 0
+    mapped_arr = []
+    while i < length
+       mapped_arr << yield(self[i])
+        i+=1
+    end
+    mapped_arr
+  end
+
   # def my_inject
   # end
 end
