@@ -19,12 +19,12 @@ def solve
   # p numbers
 
   # TEST FOR #my_all?
-  numbers = [1, 2, 3, 4, 5]
-  p numbers.my_all? { |x| x < 6 }
+  # numbers = [1, 2, 3, 4, 5]
+  # p numbers.my_all? { |x| x < 6 }
 
   # TEST FOR #my_any?
-  # numbers = [1, 2, 3, 4, 5, 6]
-  # p numbers.my_any? { |x| x != 4 }
+  numbers = [1, 2, 3, 4, 5, 6]
+  p numbers.my_any? { |x| x != 4 }
 
   # TEST FOR #my_none?
   # numbers = [1, 2, 3, 4, 5]
