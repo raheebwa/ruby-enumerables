@@ -4,14 +4,14 @@ load 'src/enumerable.rb'
 
 def solve
   # TEST FOR #my_each
-  [1,2,3,4].my_each do |x|
-   puts "#{x}"
-  end
+  # [1,2,3,4].my_each do |x|
+  #  puts "#{x}"
+  # end
 
   # TEST FOR #my_each_with_index
-  # [1, 2, 3, 4].my_each_with_index do |x, i|
-  #   puts "#{i}. #{x} and a.."
-  # end
+  [1, 2, 3, 4].my_each_with_index do |x, i|
+    puts "#{i} with index #{x}"
+  end
 
   # TEST FOR #my_select
   # numbers = [1, 2, 3, 4, 5, 6]
