@@ -29,7 +29,7 @@ module Enumerable
     selected_arr
   end
 
-  def my_all? # bool
+  def my_all? 
     i = 0
     while i < length
       if yield(self[i]) == false || yield(self[i]) == nil
@@ -40,9 +40,16 @@ module Enumerable
     true
   end
 
-  # def my_any # bool
-
-  # end
+  def my_any? 
+    i = 0
+    while i < length
+      if yield(self[i])
+        return true
+      end
+      i += 1
+    end
+    false
+  end
 
   # def my_none #bool
 
