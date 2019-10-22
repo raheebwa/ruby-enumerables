@@ -44,16 +44,23 @@ module Enumerable
     i = 0
     while i < length
       if yield(self[i])
+        return false
+      end
+      i += 1
+    end
+    true
+  end
+
+  def my_none?
+    i = 0
+    while i < length
+      if yield(self[i])
         return true
       end
       i += 1
     end
     false
   end
-
-  # def my_none #bool
-
-  # end
 
   # def my_map
   # end
