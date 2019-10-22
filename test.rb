@@ -36,16 +36,18 @@ def solve
   # p strings.count
 
   # TEST FOR #my_map
-  # array = [1, 2, 3]
+  array = [1, 2, 3]
   # p(array.my_map { |n| n * 2 })
   # #  Control
   # p(array.map { |n| n * 2 })
+  my_proc = Proc.new { |x| "#{x} something to do" }
+  p array.my_map(my_proc)
 
   # TEST FOR #my_inject
-  arr = [3, 6, 10, 13]
-  p(arr.my_inject {|sum, number| sum + number})
-  # Control
-  p(arr.inject{|sum, number| sum + number})
+  # arr = [3, 6, 10, 13]
+  # p(arr.my_inject {|sum, number| sum + number})
+  # # Control
+  # p(arr.inject{|sum, number| sum + number})
   
 end
 
