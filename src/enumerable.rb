@@ -29,23 +29,21 @@ module Enumerable
     selected_arr
   end
 
-  def my_all? 
+  def my_all?
     i = 0
     while i < length
-      if yield(self[i]) == false || yield(self[i]) == nil
-        return false
-      end
+      return false if yield(self[i]) == false || yield(self[i]).nil?
+
       i += 1
     end
     true
   end
 
-  def my_any? 
+  def my_any?
     i = 0
     while i < length
-      if yield(self[i])
-        return false
-      end
+      return false if yield(self[i])
+
       i += 1
     end
     true
@@ -54,47 +52,43 @@ module Enumerable
   def my_none?
     i = 0
     while i < length
-      if yield(self[i])
-        return true
-      end
+      return true if yield(self[i])
+
       i += 1
     end
     false
   end
 
   def my_count
-     i = 0
+    i = 0
     count = []
 
     if block_given?
-      while i < self.length
-        if yield(self[i])
-          count << self[i]
-        end
+      while i < length
+        count << self[i] if yield(self[i])
         i += 1
       end
       return count.length
     end
-    self.length
+    length
   end
 
-  def my_map block=nil
-    
+  def my_map(block = nil)
     mapped_arr = []
-     if block
-        self.my_each_with_index {|elem,index| mapped_arr[index] = block.call(elem)}
-      else
-        self.my_each_with_index {|elem,index| mapped_arr[index] = yield(elem)}
-      end
+    if block
+      my_each_with_index { |elem, index| mapped_arr[index] = block.call(elem) }
+    else
+      my_each_with_index { |elem, index| mapped_arr[index] = yield(elem) }
+    end
     mapped_arr
   end
 
-  def my_inject initial = nil
-      initial == nil ? result = self[0] : result = initial
-  
-      for i in 1..self.length - 1 
-        result = yield(result,self[i])
-      end 
-      result
+  def my_inject(initial = nil)
+    result = initial.nil? ? self[0] : initial
+
+    (1..length - 1).each do |i|
+      result = yield(result, self[i])
     end
+    result
+  end
 end
