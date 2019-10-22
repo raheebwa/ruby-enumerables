@@ -9,14 +9,14 @@ def solve
   # end
 
   # TEST FOR #my_each_with_index
-  [1, 2, 3, 4].my_each_with_index do |x, i|
-    puts "#{i} with index #{x}"
-  end
+  # [1, 2, 3, 4].my_each_with_index do |x, i|
+  #   puts "#{i} with index #{x}"
+  # end
 
   # TEST FOR #my_select
-  # numbers = [1, 2, 3, 4, 5, 6]
-  # p numbers.my_select { |x| x.even? }
-  # p numbers
+  numbers = [1, 2, 3, 4, 5, 6]
+  p numbers.my_select { |x| x.even? }
+  p numbers
 
   # TEST FOR #my_all?
   # numbers = [1, 2, 3, 4, 5]

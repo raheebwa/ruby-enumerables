@@ -19,9 +19,15 @@ module Enumerable
     self
   end
 
-  # def my_select
-
-  # end
+  def my_select
+    i = 0
+    selected_arr = []
+    while i < length
+      selected_arr << self[i] if yield(self[i]) == true
+      i += 1
+    end
+    selected_arr
+  end
 
   # def my_all # bool
   # end
