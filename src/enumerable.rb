@@ -88,6 +88,12 @@ module Enumerable
     mapped_arr
   end
 
-  # def my_inject
-  # end
+  def my_inject initial = nil
+      initial == nil ? result = self[0] : result = initial
+  
+      for i in 1..self.length - 1 
+        result = yield(result,self[i])
+      end 
+      result
+    end
 end

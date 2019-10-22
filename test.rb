@@ -43,9 +43,9 @@ def solve
 
   # TEST FOR #my_inject
   arr = [3, 6, 10, 13]
-  p(arr.my_inject(:+))
+  p(arr.my_inject {|sum, number| sum + number})
   # Control
-  p(arr.inject(:+))
+  p(arr.inject{|sum, number| sum + number})
   
 end
 
