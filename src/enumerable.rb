@@ -40,7 +40,7 @@ module Enumerable
       my_each { |obj| return false unless yield(obj) }
     elsif pattern
       my_each do |obj|
-        return false unless pattern_match?(obj, pattern)
+        return false unless matchers?(obj, pattern)
       end
     else
       my_each { |obj| return false unless obj }
@@ -54,7 +54,7 @@ module Enumerable
       my_each { |obj| return true if yield(obj) }
     elsif pattern
       my_each do |obj|
-        return true if pattern_match?(obj, pattern)
+        return true if matchers?(obj, pattern)
       end
     else
       my_each { |obj| return true if obj }
@@ -67,7 +67,7 @@ module Enumerable
       my_each { |obj| return false if yield(obj) }
     elsif pattern
       my_each do |obj|
-        return false if pattern_match?(obj, pattern)
+        return false if matchers?(obj, pattern)
       end
     else
       my_each { |obj| return false if obj }
@@ -87,7 +87,7 @@ module Enumerable
     count
   end
 
-  def my_map(proc=nil)
+  def my_map(proc = nil)
     return to_enum unless block_given?
 
     result = []
@@ -101,7 +101,7 @@ module Enumerable
   end
 
   def my_inject(*args)
-    initial, sym = clean_params(*args)
+    initial, sym = sanitize_params(*args)
 
     array = initial ? to_a : to_a[1..-1]
     initial ||= to_a[0]
@@ -114,13 +114,13 @@ module Enumerable
   end
 
   # Shared methods
-  def pattern_match?(obj, pattern)
+  def matchers?(obj, pattern)
     (obj.respond_to?(:eql?) && obj.eql?(pattern)) ||
       (pattern.is_a?(Class) && obj.is_a?(pattern)) ||
       (pattern.is_a?(Regexp) && pattern.match(obj))
   end
 
-  def clean_params(*args)
+  def sanitize_params(*args)
     initial, sym = nil
     args.each do |arg|
       initial = arg if arg.is_a? Numeric
