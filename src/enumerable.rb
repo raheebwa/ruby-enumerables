@@ -35,66 +35,97 @@ module Enumerable
     selected_arr
   end
 
-  def my_all?
-    i = 0
-    while i < length
-      return false if yield(self[i]) == false || yield(self[i]).nil?
-
-      i += 1
+  def my_all?(pattern = nil)
+    if block_given?
+      my_each { |obj| return false unless yield(obj) }
+    elsif pattern
+      my_each do |obj|
+        return false unless pattern_match?(obj, pattern)
+      end
+    else
+      my_each { |obj| return false unless obj }
+      true
     end
     true
   end
 
-  def my_any?
-    i = 0
-    while i < length
-      return false if yield(self[i])
-
-      i += 1
-    end
-    true
-  end
-
-  def my_none?
-    i = 0
-    while i < length
-      return true if yield(self[i])
-
-      i += 1
+  def my_any?(pattern = nil)
+    if block_given?
+      my_each { |obj| return true if yield(obj) }
+    elsif pattern
+      my_each do |obj|
+        return true if pattern_match?(obj, pattern)
+      end
+    else
+      my_each { |obj| return true if obj }
     end
     false
   end
 
-  def my_count
-    i = 0
-    count = []
-
+  def my_none?(pattern = nil)
     if block_given?
-      while i < length
-        count << self[i] if yield(self[i])
-        i += 1
+      my_each { |obj| return false if yield(obj) }
+    elsif pattern
+      my_each do |obj|
+        return false if pattern_match?(obj, pattern)
       end
-      return count.length
-    end
-    length
-  end
-
-  def my_map(block = nil)
-    mapped_arr = []
-    if block
-      my_each_with_index { |elem, index| mapped_arr[index] = block.call(elem) }
     else
-      my_each_with_index { |elem, index| mapped_arr[index] = yield(elem) }
+      my_each { |obj| return false if obj }
     end
-    mapped_arr
+    true
   end
 
-  def my_inject(initial = nil)
-    result = initial.nil? ? self[0] : initial
-
-    (1..length - 1).each do |i|
-      result = yield(result, self[i])
+  def my_count(item = nil)
+    count = 0
+    if block_given?
+      my_each { |item_| count += 1 if yield(item_) }
+    elsif item
+      my_each { |item_| count += 1 if item_ == item }
+    else
+      count = length
     end
+    count
+  end
+
+  def my_map(proc=nil)
+    return to_enum unless block_given?
+
+    result = []
+    if proc
+      my_each { |item| result << proc.call(item) }
+    else
+      my_each { |item| result << yield(item) }
+    end
+
     result
+  end
+
+  def my_inject(*args)
+    initial, sym = clean_params(*args)
+
+    array = initial ? to_a : to_a[1..-1]
+    initial ||= to_a[0]
+    if block_given?
+      array.my_each { |item| initial = yield(initial, item) }
+    elsif sym
+      array.my_each { |item| initial = initial.public_send(sym, item) }
+    end
+    initial
+  end
+
+  # Shared methods
+  def pattern_match?(obj, pattern)
+    (obj.respond_to?(:eql?) && obj.eql?(pattern)) ||
+      (pattern.is_a?(Class) && obj.is_a?(pattern)) ||
+      (pattern.is_a?(Regexp) && pattern.match(obj))
+  end
+
+  def clean_params(*args)
+    initial, sym = nil
+    args.each do |arg|
+      initial = arg if arg.is_a? Numeric
+      sym = arg unless arg.is_a? Numeric
+    end
+    [initial, sym]
   end
 end

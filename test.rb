@@ -18,14 +18,13 @@ def solve
   # p numbers.my_select { |x| x.even? }
   # p numbers
 
-  # TEST FOR #my_all?
-  p %w[ant bear cat].my_all? { |word| word.length >= 3 } #=> true
-  p %w[ant bear cat].my_all? { |word| word.length >= 4 } #=> false
-  p %w[ant bear cat].my_all?(/t/)                        #=> false
-  p [1, 2i, 3.14].my_all?(Numeric)                       #=> true
-  p [nil, true, 99].my_all?                              #=> false
-  p [].my_all?                                           #=> true
-
+  # # TEST FOR #my_all?
+  # p %w[ant bear cat].my_all? { |word| word.length >= 3 } #=> true
+  # p %w[ant bear cat].my_all? { |word| word.length >= 4 } #=> false
+  # p %w[ant bear cat].my_all?(/t/) #=> false
+  # p [1, 2i, 3.14].my_all?(Numeric) #=> true
+  # p [nil, true, 99].my_all? #=> false
+  # p [].my_all? #=> true
 
   # TEST FOR #my_any?
   # numbers = [1, 2, 3, 4, 5, 6]
@@ -41,12 +40,10 @@ def solve
   # p strings.count
 
   # TEST FOR #my_map
-  # array = [1, 2, 3]
-  # # p(array.my_map { |n| n * 2 })
-  # # #  Control
-  # # p(array.map { |n| n * 2 })
-  # my_proc = proc { |x| "#{x} something to do" }
-  # p array.my_map(my_proc)
+  array = [1, 2, 3]
+  p(array.my_map { |n| n * 2 })
+  my_proc = proc { |x| "#{x} something to do" }
+  p array.my_map(my_proc)
 
   # TEST FOR #my_inject
   # arr = [3, 6, 10, 13]
