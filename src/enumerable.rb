@@ -113,6 +113,10 @@ module Enumerable
     initial
   end
 
+  # def multiply_els(arr)
+  #   arr.my_inject(:*)
+  # end
+
   # Shared methods
   def matchers?(obj, pattern)
     (obj.respond_to?(:eql?) && obj.eql?(pattern)) ||
